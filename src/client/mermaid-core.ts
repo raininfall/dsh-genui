@@ -48,12 +48,15 @@ async function loadMermaid(target?: HTMLElement): Promise<typeof import('mermaid
     // Strict default: mermaid escapes/sanitizes; we never enable htmlLabels.
     securityLevel: 'strict',
     theme: 'base',
+    // Intrinsic size: the card scrolls instead of shrinking a wide flowchart
+    // into unreadable type (720px cap used to render 13px labels at ~5px).
+    flowchart: { useMaxWidth: false },
     themeVariables: {
       background: 'transparent',
       // Freeze the same font into measurement and the returned SVG: inheriting
       // from body while measuring and from a card while displaying clips labels.
       fontFamily: source.ownerDocument.defaultView!.getComputedStyle(source).fontFamily,
-      fontSize: '13px',
+      fontSize: '15px',
       primaryColor: token('--dsw-alias-bg-layer-2', '#2c2c2e'),
       primaryTextColor: token('--dsw-alias-label-primary', '#e6e6e6'),
       primaryBorderColor: token('--dsw-alias-border-l2', 'rgba(255,255,255,0.12)'),
