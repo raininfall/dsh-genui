@@ -1904,22 +1904,18 @@ img.mediaPlayer { aspect-ratio: 16 / 9; object-fit: cover; background: var(--dsl
 /* ---------- mermaid ---------- */
 
 .mermaid {
-  overflow-x: auto;
   padding: var(--dsl-g-gap-xs) 0;
-  /* Auto-layout diagrams are drawn at their intrinsic size: a 3-node vertical
-     flowchart is ~130px wide and used to sit at the left edge of a 1000px
-     column as a thumbnail. Centre it and let it fill a readable width. */
+  /* Intrinsic size instead of a fixed viewport: a wide flowchart scrolls
+     inside the card rather than being squeezed until its labels vanish. */
   max-height: 80vh;
   overflow: auto;
 }
 .mermaid svg {
-  /* Intrinsic width (mermaid `useMaxWidth: false`) is the readable size: a
-     wide flowchart used to be squeezed into 720px, turning 13px labels into
-     ~5px. Keep the drawn size and let the container scroll instead; only
-     tiny diagrams get a readable floor via `min-width`. */
+  /* mermaid `useMaxWidth: false` gives the SVG its drawn width, so 15px
+     labels stay 15px whatever the diagram's width. Small diagrams stay small
+     and centred; wide ones scroll horizontally in .mermaid. */
   display: block;
   width: auto;
-  min-width: min(100%, 320px);
   max-width: none;
   height: auto;
   max-height: none;
